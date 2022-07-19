@@ -39,7 +39,7 @@
 
 					<form method="post"  th:object="${cliente}" th:action="${!editMode} ? @{/public/cliente/save} : @{/cliente/save}" >
 						<fieldset>
-							<input type="hidden" th:field="*{id}" />
+							<input type="hidden" th:field="*{id}" th:if="${editMode}"/>
 
 							<label for="nome">Nome: </label><br />
 							<input type="text" id="nome" name="nome" placeholder="Nome..." th:field="*{nome}"
@@ -85,6 +85,7 @@
 								</div><br>
 							</div>
 							<input type="hidden" name="senha" value="*" th:if="${editMode}" />
+
 							<input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'" />
 						</fieldset>
 					</form>

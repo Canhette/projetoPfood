@@ -1,10 +1,9 @@
 package br.com.canhette.pfood.infrastructure.web.controller;
 
-import br.com.canhette.pfood.application.ClienteService;
-import br.com.canhette.pfood.application.RestauranteService;
-import br.com.canhette.pfood.application.ValidationException;
+import br.com.canhette.pfood.application.service.ClienteService;
+import br.com.canhette.pfood.application.service.RestauranteService;
+import br.com.canhette.pfood.application.service.ValidationException;
 import br.com.canhette.pfood.domain.cliente.Cliente;
-import br.com.canhette.pfood.domain.restaurante.CategoriaRestaurante;
 import br.com.canhette.pfood.domain.restaurante.CategoriaRestauranteRespository;
 import br.com.canhette.pfood.domain.restaurante.Restaurante;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.List;
 
 
 @Controller
@@ -86,8 +84,8 @@ public class PublicController {
 
         }
 
-
         ControllerHelper.setEditMode(model, false);
+        ControllerHelper.addCategoriasToRequest(categoriaRestauranteRespository, model);
         return "restaurante-cadastro";
     }
 

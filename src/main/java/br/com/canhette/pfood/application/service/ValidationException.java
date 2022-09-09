@@ -1,4 +1,4 @@
-package br.com.canhette.pfood.application;
+package br.com.canhette.pfood.application.service;
 
 public class ValidationException extends Exception{
 

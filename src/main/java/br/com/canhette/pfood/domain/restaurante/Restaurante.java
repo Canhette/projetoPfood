@@ -1,6 +1,8 @@
 package br.com.canhette.pfood.domain.restaurante;
 
 import br.com.canhette.pfood.domain.usuario.Usuario;
+import br.com.canhette.pfood.infrastructure.web.validator.UploadConstraint;
+import br.com.canhette.pfood.util.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +30,7 @@ public class Restaurante extends Usuario {
     @Size(max = 80)
     private String logotipo;
 
+    @UploadConstraint(acceptedTypes = {FileType.JPG, FileType.PNG}, message = "Arquivo invalido")
     private transient MultipartFile logotipoFile;
 
     @NotNull(message = "A taxa de entrega nao pode ser vazia")
@@ -55,7 +58,7 @@ public class Restaurante extends Usuario {
             throw new IllegalStateException("É preciso primeiro gravar o registro");
         }
 
-        //TODO: mudar forma de ler extensão
-        this.logotipo = String.format("%04d-logo.%s", getId(), ".png");
+
+        this.logotipo = String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension());
     }
 }
